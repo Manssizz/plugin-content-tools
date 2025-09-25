@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - english
   pull_request:
     branches:
       - main
+      - english
 
 jobs:
   ci:

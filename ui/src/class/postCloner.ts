@@ -20,10 +20,10 @@ class PostCloner {
         postRequest: newPostData,
       });
 
-      Toast.success('文章克隆成功，如果列表没有刷新，请手动刷新一次');
+      Toast.success('Article cloned successfully. If the list does not refresh, please refresh manually.');
     } catch (error) {
       console.error('Failed to clone post', error);
-      Toast.error('克隆文章失败');
+      Toast.error('Failed to clone article');
     }
   }
 
@@ -41,7 +41,7 @@ class PostCloner {
     set(postToCreate, 'spec.headSnapshot', '');
     set(postToCreate, 'spec.releaseSnapshot', '');
     set(postToCreate, 'spec.slug', `${originalPost.spec.slug}-${randomUUID().split('-')[0]}`);
-    set(postToCreate, 'spec.title', originalPost.spec.title + '（副本）');
+    set(postToCreate, 'spec.title', originalPost.spec.title + ' (Copy)');
     set(postToCreate, 'spec.publish', false);
     set(postToCreate, 'metadata', {
       name: randomUUID(),

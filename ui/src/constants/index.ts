@@ -7,6 +7,6 @@ export const ContentTypes = [
   {
     type: 'html',
     extension: 'html',
-    displayName: '富文本',
+    displayName: 'Rich Text',
   },
 ];

@@ -19,12 +19,12 @@ export default definePlugin({
           loadingComponent: VLoading,
         }),
         meta: {
-          title: '文章导入',
-          description: '导入文章到 Halo',
+          title: 'Article Import',
+          description: 'Import Articles to Halo',
           searchable: true,
           permissions: ['*'],
           menu: {
-            name: '文章导入',
+            name: 'Article Import',
             icon: markRaw(MingcuteFileImportLine),
             priority: 0,
           },
@@ -51,7 +51,7 @@ export default definePlugin({
       return [
         {
           name: 'content-converter',
-          displayName: '内容格式转换器',
+          displayName: 'Content Format Converter',
           logo: '/plugins/content-tools/assets/icon.svg',
           component: defineAsyncComponent({
             loader: () => import('./components/ConverterEditor.vue'),
@@ -72,19 +72,19 @@ export default definePlugin({
         {
           priority: 22,
           component: markRaw(VDropdownItem),
-          label: '转换',
+          label: 'Convert',
           visible: true,
           children: [
             {
               priority: 0,
               component: markRaw(VDropdownItem),
-              label: '转换为富文本格式',
+              label: 'Convert to Rich Text Format',
               visible: true,
               action: async (post: ListedPost) => {
                 Dialog.warning({
-                  title: '转换为富文本格式',
+                  title: 'Convert to Rich Text Format',
                   description:
-                    '将 Markdown 转换为富文本格式并不能保证完全兼容，建议转换之后检查内容是否完整，如果有问题，可以在版本历史中找到之前的版本。',
+                    'Converting Markdown to Rich Text Format does not guarantee full compatibility. It is recommended to check the content after conversion for completeness. If there are issues, you can find the previous version in the version history.',
                   onConfirm: async () => {
                     const { PostOperations } = await import('./class/postOperations');
                     await PostOperations.convertContent(post.post, 'html');
@@ -95,13 +95,13 @@ export default definePlugin({
             {
               priority: 1,
               component: markRaw(VDropdownItem),
-              label: '转换为 Markdown 格式',
+              label: 'Convert to Markdown Format',
               visible: true,
               action: async (post: ListedPost) => {
                 Dialog.warning({
-                  title: '转换为 Markdown 格式',
+                  title: 'Convert to Markdown Format',
                   description:
-                    '将富文本格式转换为 Markdown 格式并不能保证完全兼容，建议转换之后检查内容是否完整，如果有问题，可以在版本历史中找到之前的版本。',
+                    'Converting Rich Text Format to Markdown Format does not guarantee full compatibility. It is recommended to check the content after conversion for completeness. If there are issues, you can find the previous version in the version history.',
                   onConfirm: async () => {
                     const { PostOperations } = await import('./class/postOperations');
                     await PostOperations.convertContent(post.post, 'markdown');
@@ -124,14 +124,14 @@ export default definePlugin({
         {
           priority: 24,
           component: markRaw(VDropdownItem),
-          label: '复制文章内容',
+          label: 'Copy Article Content',
           visible: true,
           permissions: ['system:posts:view'],
           children: [
             {
               priority: 0,
               component: markRaw(VDropdownItem),
-              label: '以原格式复制',
+              label: 'Copy in Original Format',
               visible: true,
               action: async (post: ListedPost) => {
                 const { default: PostContentCopier } = await import('./class/postContentCopier');
@@ -143,7 +143,7 @@ export default definePlugin({
             {
               priority: 1,
               component: markRaw(VDropdownItem),
-              label: '转换为 Markdown 并复制',
+              label: 'Convert to Markdown and Copy',
               visible: true,
               action: async (post: ListedPost) => {
                 const { default: PostContentCopier } = await import('./class/postContentCopier');

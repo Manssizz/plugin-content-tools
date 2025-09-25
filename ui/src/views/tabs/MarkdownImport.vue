@@ -343,38 +343,38 @@ const showAlert = useSessionStorage('plugin:content-tools:markdown-import-alert'
 <template>
   <div>
     <div v-if="showAlert" class=":uno: mb-5 w-full lg:w-1/2">
-      <VAlert title="提示" @close="showAlert = false">
+      <VAlert title="Tip" @close="showAlert = false">
         <template #description>
           <ul class=":uno: ml-2 list-disc list-inside space-y-1">
             <li>
-              导入 Markdown 文件支持同时导入关联图片，你可以选择同时包含了 Markdown
-              文件和图片的文件夹。
+              Importing Markdown files supports importing associated images at the same time, you can choose a folder that contains both Markdown
+              files and images.
             </li>
             <li>
-              图片会上传到与个人中心关联的存储策略，请提前在
+              Images will be uploaded to the storage policy associated with the personal center, please set it in advance in
               <a class=":uno: text-gray-900 hover:text-gray-600" href="/console/settings?tab=user"
-                >用户设置</a
+                >User Settings</a
               >
-              中设置。
+              .
             </li>
             <li>
-              支持解析 Markdown 的 Front Matter 数据，包括
-              title、slug、description、excerpt、categories、tags。
+              Supports parsing Markdown Front Matter data, including
+              title, slug, description, excerpt, categories, tags.
             </li>
-            <li>由于平台的差异，可能无法支持部分 Markdown 语法。</li>
+            <li>Due to platform differences, some Markdown syntax may not be supported.</li>
           </ul>
         </template>
       </VAlert>
     </div>
     <VSpace>
-      <VButton :disabled="isBusy" @click="fileInput?.click()">选择 Markdown 文件</VButton>
-      <VButton :disabled="isBusy" @click="folderInput?.click()">选择 Markdown 文件夹</VButton>
-      <VButton :disabled="isBusy" @click="imageInput?.click()"> 选择图片文件夹 </VButton>
+      <VButton :disabled="isBusy" @click="fileInput?.click()">Select Markdown File</VButton>
+      <VButton :disabled="isBusy" @click="folderInput?.click()">Select Markdown Folder</VButton>
+      <VButton :disabled="isBusy" @click="imageInput?.click()"> Select Image Folder </VButton>
       <VButton v-if="importQueue.length > 0" :disabled="isBusy" @click="handleClear">
-        清空文件
+        Clear Files
       </VButton>
       <VButton v-if="imageFiles.length > 0" :disabled="isBusy" @click="handleClearImages">
-        清空图片
+        Clear Images
       </VButton>
 
       <input
@@ -406,9 +406,9 @@ const showAlert = useSessionStorage('plugin:content-tools:markdown-import-alert'
       <FormKit
         v-model="convertToHtml"
         type="checkbox"
-        label="转为富文本格式"
+        label="Convert to Rich Text Format"
         :disabled="isBusy"
-        help="可能出现格式不兼容的问题，建议谨慎使用"
+        help="Format incompatibility issues may occur, use with caution"
       ></FormKit>
     </div>
 
@@ -416,9 +416,9 @@ const showAlert = useSessionStorage('plugin:content-tools:markdown-import-alert'
       <FormKit
         v-model="publishAfterImport"
         type="checkbox"
-        label="导入后发布文章"
+        label="Publish Article After Import"
         :disabled="isBusy"
-        help="取消选择时，导入的文章将保存为草稿"
+        help="When unchecked, imported articles will be saved as drafts"
       ></FormKit>
     </div>
 
@@ -426,32 +426,32 @@ const showAlert = useSessionStorage('plugin:content-tools:markdown-import-alert'
       <div class=":uno: flex items-center justify-between">
         <div class=":uno: h-7 flex items-center gap-3 text-sm text-gray-600">
           <span>
-            总计: <b class=":uno: text-gray-900">{{ queueStats.total }}</b>
+            Total: <b class=":uno: text-gray-900">{{ queueStats.total }}</b>
           </span>
           <span>
-            待处理:
+            Pending:
             <b class=":uno: text-gray-900">{{ queueStats.pending }}</b>
           </span>
           <span>
-            处理中:
+            Processing:
             <b class=":uno: text-gray-900">{{ queueStats.processing }}</b>
           </span>
           <span>
-            成功: <b class=":uno: text-gray-900">{{ queueStats.success }}</b>
+            Success: <b class=":uno: text-gray-900">{{ queueStats.success }}</b>
           </span>
           <span>
-            失败:
+            Failed:
             <b :class="{ ':uno: !text-red-500': queueStats.error > 0 }" class=":uno: text-gray-900">
               {{ queueStats.error }}
             </b>
           </span>
           <span v-if="queueStats.imageCount > 0" class=":uno: text-blue-600">
-            图片: <b>{{ queueStats.imageCount }}</b>
+            Images: <b>{{ queueStats.imageCount }}</b>
           </span>
         </div>
         <VSpace>
           <VButton v-if="queueStats.error > 0" :disabled="isBusy" size="sm" @click="handleRetryAll">
-            重试所有
+            Retry All
           </VButton>
           <VButton
             type="secondary"
@@ -459,7 +459,7 @@ const showAlert = useSessionStorage('plugin:content-tools:markdown-import-alert'
             :disabled="queueStats.pending === 0"
             @click="handleStart"
           >
-            开始导入
+            Start Import
           </VButton>
         </VSpace>
       </div>
@@ -495,7 +495,7 @@ const showAlert = useSessionStorage('plugin:content-tools:markdown-import-alert'
                     class=":uno: inline-flex items-center gap-2"
                   >
                     <MingcuteCloseCircleLine v-tooltip="item.error" class=":uno: text-red-500" />
-                    <VButton size="sm" :disabled="isBusy" @click="retryItem(item)"> 重试 </VButton>
+                    <VButton size="sm" :disabled="isBusy" @click="retryItem(item)"> Retry </VButton>
                   </div>
                   <MingcuteTimeLine v-else class=":uno: text-gray-500" />
                 </template>
@@ -507,7 +507,7 @@ const showAlert = useSessionStorage('plugin:content-tools:markdown-import-alert'
     </div>
 
     <div v-else class=":uno: h-64 flex items-center justify-center text-sm text-gray-600">
-      请选择要导入的 Markdown 文件或文件夹
+      Please select the Markdown file or folder to import
     </div>
   </div>
 </template>

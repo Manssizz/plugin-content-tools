@@ -17,8 +17,8 @@ const exportTypeOptions: { label: string; value: ExportType }[] = [
 ];
 
 const imageExportModeOptions: { label: string; value: ImageExportMode }[] = [
-  { label: '文件', value: 'file' },
-  { label: '内嵌', value: 'inline' },
+  { label: 'File', value: 'file' },
+  { label: 'Inline', value: 'inline' },
 ];
 
 const { post } = defineProps<{
@@ -37,22 +37,22 @@ async function onSubmit(data: ExportForm) {
     exporting.value = true;
     await ContentExporter.export(post.post, data.type, data.includeImages, data.imageExportMode);
     modal.value?.close();
-    Toast.success('导出成功');
+    Toast.success('Export successful');
   } catch (error) {
     console.error(error);
-    Toast.error('导出失败，请重试');
+    Toast.error('Export failed, please try again');
   } finally {
     exporting.value = false;
   }
 }
 </script>
 <template>
-  <VDropdownItem @click="display = true">导出</VDropdownItem>
+  <VDropdownItem @click="display = true">Export</VDropdownItem>
   <VModal
     v-if="display"
     ref="modal"
     :centered="false"
-    title="导出"
+    title="Export"
     mount-to-body
     @close="display = false"
   >
@@ -63,18 +63,18 @@ async function onSubmit(data: ExportForm) {
       name="post-export-form"
       @submit="onSubmit"
     >
-      <FormKit label="导出格式" type="select" name="type" :options="exportTypeOptions" />
-      <FormKit v-if="value.type !== 'pdf'" label="包含图片" type="checkbox" name="includeImages" />
+      <FormKit label="Export Format" type="select" name="type" :options="exportTypeOptions" />
+      <FormKit v-if="value.type !== 'pdf'" label="Include Images" type="checkbox" name="includeImages" />
       <FormKit
         v-if="value.type !== 'pdf' && value.includeImages"
         type="select"
-        label="图片导出方式"
+        label="Image Export Mode"
         name="imageExportMode"
         :options="imageExportModeOptions"
         :help="
           value.imageExportMode === 'file'
-            ? '导出为文件时，图片会以附件的形式导出，与文章压缩在一起'
-            : '导出为内嵌时，图片会以 Base64 的形式嵌入到导出文件中'
+            ? 'When exporting as file, images will be exported as attachments and compressed together with the article'
+            : 'When exporting as inline, images will be embedded in Base64 format into the exported file'
         "
       ></FormKit>
     </FormKit>
@@ -82,9 +82,9 @@ async function onSubmit(data: ExportForm) {
       <VSpace>
         <!-- @vue-ignore -->
         <VButton type="secondary" :loading="exporting" @click="$formkit.submit('post-export-form')">
-          导出
+          Export
         </VButton>
-        <VButton @click="modal?.close()">取消</VButton>
+        <VButton @click="modal?.close()">Cancel</VButton>
       </VSpace>
     </template>
   </VModal>

@@ -14,8 +14,8 @@ spec:
   homepage: https://github.com/ruibaby/plugin-content-tools#readme
   repo: https://github.com/ruibaby/plugin-content-tools
   issues: https://github.com/ruibaby/plugin-content-tools/issues
-  displayName: "内容助手"
-  description: "支持文章内容格式转换、文章导入导出等功能"
+  displayName: "Content Assistant"
+  description: "Supports article content format conversion, article import and export, and other functions"
   license:
     - name: "GPL-3.0"
       url: "https://github.com/ruibaby/plugin-content-tools/blob/main/LICENSE"

@@ -7,7 +7,7 @@ import MingcuteFileImportLine from '~icons/mingcute/file-import-line';
 const tabs = [
   {
     id: 'markdown',
-    label: 'Markdown 导入',
+    label: 'Markdown Import',
     component: defineAsyncComponent({
       loader: () => import('./tabs/MarkdownImport.vue'),
       loadingComponent: VLoading,
@@ -15,7 +15,7 @@ const tabs = [
   },
   {
     id: 'word',
-    label: 'Word（.docx） 导入',
+    label: 'Word (.docx) Import',
     component: defineAsyncComponent({
       loader: () => import('./tabs/WordImport.vue'),
       loadingComponent: VLoading,
@@ -26,7 +26,7 @@ const tabs = [
 const activeTab = useLocalStorage('plugin:content-tools:import-active-tab', 'markdown');
 </script>
 <template>
-  <VPageHeader title="文章导入">
+  <VPageHeader title="Article Import">
     <template #icon>
       <MingcuteFileImportLine />
     </template>

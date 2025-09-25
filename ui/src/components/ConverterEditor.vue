@@ -20,7 +20,7 @@ const content = ref<ContentWrapper | undefined>();
 
 onMounted(async () => {
   if (!name.value) {
-    Toast.warning('当前没有创建文章，不能使用转换功能');
+    Toast.warning('No article is currently created, cannot use conversion function');
     return;
   }
 
@@ -37,7 +37,7 @@ onMounted(async () => {
   content.value = latestContent;
 
   if (!content.value.rawType) {
-    Toast.success('当前文章内容或者类型不存在');
+    Toast.success('Current article content or type does not exist');
     return;
   }
 
@@ -48,7 +48,7 @@ async function handleConvert(option: ConversionOption) {
   Dialog.warning({
     title: option.label,
     description:
-      '转换格式并不能保证完全兼容，建议转换之后检查内容是否完整，如果有问题，可以在版本历史中找到之前的版本。',
+      'Format conversion does not guarantee full compatibility. It is recommended to check the content after conversion for completeness. If there are issues, you can find the previous version in the version history.',
     onConfirm: async () => {
       if (!post.value) {
         return;
@@ -60,7 +60,7 @@ async function handleConvert(option: ConversionOption) {
 
       localStorage.removeItem('editor-provider-name');
 
-      Toast.success('转换完成');
+      Toast.success('Conversion completed');
 
       setTimeout(() => {
         window.location.reload();
@@ -73,8 +73,8 @@ async function handleConvert(option: ConversionOption) {
   <div class=":uno: bg-white">
     <div class=":uno: size-full flex flex-col items-center pt-20">
       <div>
-        <h2 class=":uno: text-2xl font-medium">内容格式转换器</h2>
-        <p class=":uno: mt-4 text-sm text-gray-600">请选择你要转换的格式：</p>
+        <h2 class=":uno: text-2xl font-medium">Content Format Converter</h2>
+        <p class=":uno: mt-4 text-sm text-gray-600">Please select the format you want to convert to:</p>
         <ul class=":uno: mt-4 space-y-2">
           <li v-for="option in converterOptions" :key="option.toType + option.fromType">
             <button

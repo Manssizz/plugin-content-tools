@@ -20,5 +20,5 @@ async function handleClone() {
 }
 </script>
 <template>
-  <VDropdownItem @click="handleClone"> 克隆 </VDropdownItem>
+  <VDropdownItem @click="handleClone"> Clone </VDropdownItem>
 </template>
