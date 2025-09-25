@@ -1,0 +1,46 @@
+name: Autobuild on All Branches
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Build UI
+        run: |
+          cd ui
+          pnpm install
+          pnpm build
+
+      - name: Build Plugin
+        run: ./gradlew build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: autobuild-${{ github.run_number }}-${{ github.ref_name }}
+          path: |
+            build/libs/*.jar
+            ui/dist/**
