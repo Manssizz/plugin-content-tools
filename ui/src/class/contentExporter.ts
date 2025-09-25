@@ -180,7 +180,7 @@ export class ContentExporter {
       }, 1000);
     } catch (error) {
       console.error('Failed to generate pdf file: ', error);
-      Toast.error('PDF 导出失败');
+      Toast.error('PDF export failed');
     }
   }
 
@@ -263,7 +263,7 @@ export class ContentExporter {
           img.onerror = () => {
             loadedCount++;
             img.src = placeholderImage;
-            img.alt = '图片加载失败';
+            img.alt = 'Image loading failed';
             img.style.border = '1px solid #ccc';
             img.style.padding = '5px';
             checkComplete();
@@ -275,7 +275,7 @@ export class ContentExporter {
         Array.from(images).forEach((img) => {
           if (!img.complete) {
             img.src = placeholderImage;
-            img.alt = '图片加载超时';
+            img.alt = 'Image loading timeout';
             img.style.border = '1px solid #ccc';
             img.style.padding = '5px';
           }

@@ -17,7 +17,7 @@ class PostContentCopier {
       this.handleContentCopy(post, postContent, convertToMarkdown);
     } catch (error) {
       console.error('Failed to copy post content', error);
-      Toast.error('复制文章内容失败');
+      Toast.error('Failed to copy post content');
     }
   }
 
@@ -62,12 +62,12 @@ class PostContentCopier {
       throw new Error('No content to copy');
     }
     copyHtmlAsRichText(processHTMLLinks(content));
-    Toast.success('文章内容已复制为富文本格式');
+    Toast.success('Post content copied as rich text format');
   }
 
   private static copyAsMarkdown(markdown: string) {
     copyText(processMarkdownLinks(markdown));
-    Toast.success('文章内容已复制为 Markdown 文本');
+    Toast.success('Post content copied as Markdown text');
   }
 
   private static async fetchPostContent(name: string): Promise<ContentWrapper> {

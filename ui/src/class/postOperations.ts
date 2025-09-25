@@ -10,12 +10,12 @@ export class PostOperations {
     });
 
     if (!content.rawType) {
-      Toast.warning('原始类型未定义');
+      Toast.warning('Original type undefined');
       return;
     }
 
     if (content.rawType.toLowerCase() === toType) {
-      Toast.warning(`当前文档已经是 ${toType} 格式，已忽略转换`);
+      Toast.warning(`Current document is already ${toType} format, conversion ignored`);
       return;
     }
 
@@ -25,10 +25,10 @@ export class PostOperations {
 
     try {
       await this.updatePostContent(post, toType, convertedRawContent, content.content || '');
-      Toast.success('转换完成');
+      Toast.success('Conversion completed');
     } catch (error) {
       if (error instanceof AxiosError) {
-        Toast.error(error.response?.data.detail || '转换失败，请重试');
+        Toast.error(error.response?.data.detail || 'Conversion failed, please retry');
       }
     }
   }
